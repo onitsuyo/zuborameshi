@@ -1,24 +1,128 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users
 
-Things you may want to cover:
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| nickname           | string     | null: false                    |
+| email              | string     | null: false, unique: true      |
+| encrypted_password | string     | null: false                    |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :recipes
+- has_many :comments
+- has_many :favorites
 
-* Configuration
+## recipes
 
-* Database creation
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| name         | string     | null: false                    |
+| caption      | string     | null: false                    |
+| cooking_time | integer    | null: false                    |
+| user         | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :recipe_ingredients
+- has_many :ingredients, through: :recipe_ingredients
+- has_many :recipe_seasonings
+- has_many :seasonings, through: :recipe_seasonings
+- has_many :recipe_procedures
+- has_many :procedures, through: :recipe_procedures
+- has_many :comments
+- has_many :favorites
+- belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
+## ingredients
 
-* Deployment instructions
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| name   | text       |                               |
 
-* ...
+### Association
+
+- has_many :recipe_ingredients
+- has_many :recipes, through: :recipe_ingredients
+
+## recipe_ingredients
+
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| recipe     | references | null: false, foreign_key: true |
+| ingredient | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :recipe
+- belongs_to :ingredient
+
+## seasonings
+
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| name   | text       |                               |
+
+### Association
+
+- has_many :recipe_seasonings
+- has_many :recipes, through: :recipe_seasonings
+
+## recipe_seasonings
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| recipe    | references | null: false, foreign_key: true |
+| seasoning | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :recipe
+- belongs_to :seasoning
+
+## procedures
+
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| name   | text       |                               |
+
+### Association
+
+- has_many :recipe_procedures
+- has_many :recipes, through: :recipe_procedures
+
+## recipe_procedures
+
+| Column    | Type       | Options                        |
+| --------- | ---------- | ------------------------------ |
+| recipe    | references | null: false, foreign_key: true |
+| procedure | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :recipe
+- belongs_to :procedure
+
+## comments
+
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| recipe | references | null:false, foreign_key: true |
+| user   | references | null:false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :recipe
+
+## favorites
+
+| Column | Type       | Options                       |
+| ------ | ---------- | ----------------------------- |
+| recipe | references | null:false, foreign_key: true |
+| user   | references | null:false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :recipe

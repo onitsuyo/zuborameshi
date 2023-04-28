@@ -3,7 +3,7 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| nickname           | string     | null: false                    |
+| name               | string     | null: false                    |
 | email              | string     | null: false, unique: true      |
 | encrypted_password | string     | null: false                    |
 
@@ -17,7 +17,7 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| name         | string     | null: false                    |
+| recipe_title | string     | null: false                    |
 | caption      | string     | null: false                    |
 | cooking_time | integer    | null: false                    |
 | user         | references | null: false, foreign_key: true |
@@ -36,9 +36,9 @@
 
 ## ingredients
 
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| name   | text       |                               |
+| Column            | Type       | Options                       |
+| ----------------- | ---------- | ----------------------------- |
+| ingredient_name   | text       |                               |
 
 ### Association
 
@@ -59,9 +59,9 @@
 
 ## seasonings
 
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| name   | text       |                               |
+| Column           | Type       | Options                       |
+| ---------------- | ---------- | ----------------------------- |
+| seasoning_name   | text       |                               |
 
 ### Association
 
@@ -84,7 +84,7 @@
 
 | Column | Type       | Options                       |
 | ------ | ---------- | ----------------------------- |
-| name   | text       |                               |
+| step   | text       |                               |
 
 ### Association
 

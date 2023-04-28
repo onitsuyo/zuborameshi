@@ -10,6 +10,14 @@
   <% end %>
 </ul>
 
+<% @recipes.each do |recipe| %>
+  <div>投稿者：<%= recipe.user.name %></div>
+  <div>料理の名前：<%= link_to recipe.recipe_title, "#" %></div>
+  <div><%= link_to image_tag(recipe.image), "#" %></div>
+  <div>料理の説明：<%= recipe.caption %></div>
+  <div>調理時間：<%= recipe.cooking_time %>分</div><br>
+<% end %>
+
 <% if user_signed_in? %>
   <br><%= link_to '料理を投稿する', new_recipe_path %>
 <% end %>

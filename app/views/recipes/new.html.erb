@@ -1,7 +1,7 @@
 <h1>投稿ページ</h1>
 
 <h2> 料理を投稿する</h2>
-<%= form_with model: @recipe, local: true do |f| %>
+<%= form_with model: @recipe_form, url: recipes_path, method: :post, local: true do |f| %>
   <%# レシピのフォーム %>
   <div>
     <%= f.label :recipe_title, "料理の名前" %>

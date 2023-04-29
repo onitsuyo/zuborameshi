@@ -16,6 +16,13 @@ class RecipesController < ApplicationController
       render :new 
     end
   end
+
+  def show
+    @recipe = Recipe.find(params[:id])
+    @ingredients = @recipe.ingredients
+    @seasonings = @recipe.seasonings
+    @procedures = @recipe.procedures
+  end
   
   private
 

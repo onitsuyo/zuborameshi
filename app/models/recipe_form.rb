@@ -16,5 +16,10 @@ class RecipeForm
 
   def save 
     recipe = Recipe.create(recipe_title: recipe_title, caption: caption, cooking_time: cooking_time, image: image, user_id: user_id)
+    if ingredient_name.present?
+      ingredient.where(ingredient_name: ingredient_name).first_or_initialize
+      ingredient.save
+      RecipeIngredient.create(recipe_id: recipe.id, ingredient_id: ingredient.id)
+    end
   end
 end

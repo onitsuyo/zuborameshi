@@ -4,7 +4,7 @@ class RecipeForm
   attr_accessor(
     :recipe_title, :caption, :cooking_time, :image, :user_id,
     :id, :created_at, :updated_at,
-    :ingredient_name, :seasoning_name
+    :ingredient_name, :seasoning_name, :step
   )
 
   with_options presence: true do 
@@ -25,6 +25,11 @@ class RecipeForm
       seasoning = Seasoning.where(seasoning_name: seasoning_name).first_or_initialize
       seasoning.save
       RecipeSeasoning.create(recipe_id: recipe.id, seasoning_id: seasoning.id)
+    end
+    if step.present?
+      procedure = Procedure.where(step: step).first_or_initialize
+      procedure.save
+      RecipeProcedure.create(recipe_id: recipe.id, procedure_id: procedure.id)
     end
   end
 end

@@ -1,8 +1,7 @@
 <h1>投稿ページ</h1>
 
 <h2> 料理を投稿する</h2>
-<%= form_with model: @recipe, local: true do |f| %>
-  <%# レシピのフォーム %>
+<%= form_with model: @recipe_form, url: recipes_path, method: :post, local: true do |f| %>
   <div>
     <%= f.label :recipe_title, "料理の名前" %>
     <%= f.text_field :recipe_title %>
@@ -19,7 +18,21 @@
     <%= f.label :cooking_time, "調理時間(分)" %>
     <%= f.text_field :cooking_time %>
   </div>
-  <%# ここまで %>
+
+  <div>
+    <%= f.label :ingredient_name, "使用する食材" %>
+    <%= f.text_field :ingredient_name %>
+  </div>
+
+  <div>
+    <%= f.label :seasoning_name, "使用する調味料" %>
+    <%= f.text_field :seasoning_name %>
+  </div>
+
+  <div>
+    <%= f.label :step, "手順" %>
+    <%= f.text_area :step %>
+  </div>
 
   <%= f.submit "投稿する" %>
 <% end %>

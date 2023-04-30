@@ -23,6 +23,12 @@ class RecipesController < ApplicationController
     @seasonings = @recipe.seasonings
     @procedures = @recipe.procedures
   end
+
+  def edit
+  end
+
+  def update
+  end
   
   private
 

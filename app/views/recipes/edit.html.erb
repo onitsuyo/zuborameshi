@@ -1,2 +1,40 @@
 <h1>編集ページ</h1>
 
+<h2> 料理を編集する</h2>
+<%= form_with model: @recipe_form, url: recipe_path(@recipe.id), method: :patch, local: true do |f| %>
+  <div>
+    <%= f.label :recipe_title, "料理の名前" %>
+    <%= f.text_field :recipe_title %>
+  </div>
+  <div>
+    <%= f.label :image, "料理の写真" %>
+    <%= f.file_field :image, id:"item-image" %>
+  </div>
+  <div>
+    <%= f.label :caption, "料理の説明" %>
+    <%= f.text_field :caption %>
+  </div>
+  <div>
+    <%= f.label :cooking_time, "調理時間(分)" %>
+    <%= f.text_field :cooking_time %>
+  </div>
+
+  <div>
+    <%= f.label :ingredient_name, "使用する食材" %>
+    <%= f.text_field :ingredient_name %>
+  </div>
+
+  <div>
+    <%= f.label :seasoning_name, "使用する調味料" %>
+    <%= f.text_field :seasoning_name %>
+  </div>
+
+  <div>
+    <%= f.label :step, "手順" %>
+    <%= f.text_field :step %>
+  </div>
+
+  <%= f.submit "投稿する" %>
+<% end %>
+
+<br><br><%= link_to "編集せずにトップページへ戻る", root_path %>

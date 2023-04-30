@@ -7,17 +7,17 @@
 <div>料理の説明：<%= @recipe.caption %></div>
 <div>調理時間：<%= @recipe.cooking_time %>分</div><br>
 <div>
-  <% @ingredients.each do |ingredient| %>
+  <% @recipe.ingredients.each do |ingredient| %>
     材料：　<%= ingredient.ingredient_name %></div>
   <% end %>
 </div>
 <div>
-  <% @seasonings.each do |seasoning| %>
+  <% @recipe.seasonings.each do |seasoning| %>
     調味料：　<%= seasoning.seasoning_name %></div>
   <% end %>
 </div>
 <div>
-  <% @procedures.each do |procedure| %>
+  <% @recipe.procedures.each do |procedure| %>
     手順：　<%= procedure.step %></div>
   <% end %>
 </div>

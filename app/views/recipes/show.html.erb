@@ -26,7 +26,7 @@
 <% if user_signed_in? %> 
   <% if current_user.id == @recipe.user_id %>
     <%= link_to "編集する", edit_recipe_path(@recipe.id), method: :get %><br>
-    <%= link_to "削除する", recipe_path(@recipe.id), method: :delete %>
+    <%= link_to "削除する", recipe_path(@recipe.id), method: :delete, data: { confirm: "削除しますか？" } %>
   <% end %>
 <% end %>
 <br><br>

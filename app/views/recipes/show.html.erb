@@ -4,7 +4,7 @@
 <div>投稿者：<%= @recipe.user.name %></div>
 <div>料理の名前：<%= @recipe.recipe_title %></div>
 <div><%= image_tag @recipe.image %></div>
-<div>料理の説明：<%= @recipe.caption %></div>
+<div>説明文：<%= @recipe.caption %></div>
 <div>調理時間：<%= @recipe.cooking_time %>分</div><br>
 <div>
   <% @recipe.ingredients.each do |ingredient| %>

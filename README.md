@@ -1,128 +1,63 @@
+# アプリケーション名
+ZUBORAMESHI
 
-## users
+# アプリケーション概要
+自分で作った料理を投稿したり他の人が作った料理を見ることができる。
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| name               | string     | null: false                    |
-| email              | string     | null: false, unique: true      |
-| encrypted_password | string     | null: false                    |
+# URL
+https://zuborameshi.onrender.com/
 
-### Association
+# テスト用アカウント
+・BASIC認証パスワード：2222  
+・BASIC認証ID：admin  
+・メールアドレス：test@mail  
+・パスワード：123456  
 
-- has_many :recipes
-- has_many :comments
-- has_many :favorites
+# 利用方法 
+### 自分が作った料理を投稿する
+------------------------
+1.トップページでユーザー新規登録を行う。  
+2.「料理を投稿する」ボタンから料理の投稿ページに遷移し、情報を入力して料理を投稿する
 
-## recipes
+### 他の人が作った料理を確認する
+-------------------------
+1.トップページに投稿された料理の名前と画像と簡単な説明の一覧を表示する
+2.料理の名前か画像をクリックするとその料理の詳細ページに遷移し、詳細な情報を見ることができる
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| recipe_title | string     | null: false                    |
-| caption      | string     | null: false                    |
-| cooking_time | integer    | null: false                    |
-| user         | references | null: false, foreign_key: true |
+# アプリケーションを作った背景
+前職の後輩と自炊をしたいという話をしていたが、なかなか出来ない理由が「めんどくさい」や「時間がない」というものだった。また、自炊をしても同じようなものばかり作ってしまいレパートリーが少ないという問題もあった。簡単に作れる料理を投稿できるアプリがあれば、自炊をするモチベーションを上げ、かつ時間がない時でも作れる料理のレパートリーを増やすことが出来ると思い、料理投稿アプリを開発することにした。
 
-### Association
+# 洗い出した要件
+https://docs.google.com/spreadsheets/d/1u0EXQl12XuYJnUeQFr_xY8nUlE4XUfIeNBUffPOqTC0/edit#gid=982722306
 
-- has_many :recipe_ingredients
-- has_many :ingredients, through: :recipe_ingredients
-- has_many :recipe_seasonings
-- has_many :seasonings, through: :recipe_seasonings
-- has_many :recipe_procedures
-- has_many :procedures, through: :recipe_procedures
-- has_many :comments
-- has_many :favorites
-- belongs_to :user
+# 実装した機能についての画像やGIFおよびその説明
 
-## ingredients
+# 実装予定の機能
+1つの料理に対して食材、調味料、手順を複数投稿できる機能
 
-| Column            | Type       | Options                       |
-| ----------------- | ---------- | ----------------------------- |
-| ingredient_name   | text       |                               |
+# データベース設計
+[![Image from Gyazo](https://i.gyazo.com/3a8dd0540a1bee9c85d04db19370027b.png)](https://gyazo.com/3a8dd0540a1bee9c85d04db19370027b)
 
-### Association
+# 画面遷移図
+[![Image from Gyazo](https://i.gyazo.com/969d0f797de066afc72b570cdb65817e.png)](https://gyazo.com/969d0f797de066afc72b570cdb65817e)
 
-- has_many :recipe_ingredients
-- has_many :recipes, through: :recipe_ingredients
+# 開発環境
+・フロントエンド      HTML,CSS,JavaScript
+・バックエンド       Ruby
+・インフラ           MacBook Air(macOS Ventura 13.0)
+・テスト             Rspec
+・テキストエディタ    Visual Studio Code
+・タスク管理         GitHub 
 
-## recipe_ingredients
+# ローカルでの動作方法
+以下のコマンドを順に実行。
+% git clone https://github.com/onitsuyo/zuborameshi
+% cd zuborameshi
+% bundle install
+% yarn install
 
-| Column     | Type       | Options                        |
-| ---------- | ---------- | ------------------------------ |
-| recipe     | references | null: false, foreign_key: true |
-| ingredient | references | null: false, foreign_key: true |
+# 工夫したポイント
+材料、調味料、手順は任意の数投稿できる機能を実装したかったので、料理のテーブルと多対多の関係にし、
+それぞれに中間テーブルを作成した。
 
-### Association
 
-- belongs_to :recipe
-- belongs_to :ingredient
-
-## seasonings
-
-| Column           | Type       | Options                       |
-| ---------------- | ---------- | ----------------------------- |
-| seasoning_name   | text       |                               |
-
-### Association
-
-- has_many :recipe_seasonings
-- has_many :recipes, through: :recipe_seasonings
-
-## recipe_seasonings
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| recipe    | references | null: false, foreign_key: true |
-| seasoning | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :recipe
-- belongs_to :seasoning
-
-## procedures
-
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| step   | text       |                               |
-
-### Association
-
-- has_many :recipe_procedures
-- has_many :recipes, through: :recipe_procedures
-
-## recipe_procedures
-
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| recipe    | references | null: false, foreign_key: true |
-| procedure | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :recipe
-- belongs_to :procedure
-
-## comments
-
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| recipe | references | null:false, foreign_key: true |
-| user   | references | null:false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :recipe
-
-## favorites
-
-| Column | Type       | Options                       |
-| ------ | ---------- | ----------------------------- |
-| recipe | references | null:false, foreign_key: true |
-| user   | references | null:false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :recipe

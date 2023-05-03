@@ -21,17 +21,20 @@
 
   <div>
     <%= f.label :ingredient_name, "使用する食材" %>
-    <%= f.text_field :ingredient_name %>
+    <%= f.text_field :ingredient_name, id: "ingredient" %>
+    <button id = "add-ingredient-btn" type = "button">食材を追加する</button>
   </div>
 
   <div>
     <%= f.label :seasoning_name, "使用する調味料" %>
-    <%= f.text_field :seasoning_name %>
+    <%= f.text_field :seasoning_name, id: "seasoning" %>
+    <button id = "add-seasoning-btn" type = "button">調味料を追加する</button>
   </div>
 
   <div>
     <%= f.label :step, "手順" %>
-    <%= f.text_field :step %>
+    <%= f.text_field :step, id: "step" %>
+    <button id = "add-step-btn" type = "button">手順を追加する</button>
   </div>
 
   <%= f.submit "投稿する" %>

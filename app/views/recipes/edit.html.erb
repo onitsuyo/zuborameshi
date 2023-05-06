@@ -1,4 +1,6 @@
-<h1>編集ページ</h1>
+<div class = "header">
+  <%= render "subheader" %>
+</div>
 
 <h2> 料理を編集する</h2>
 <%= form_with model: @recipe_form, url: recipe_path(@recipe.id), method: :patch, local: true do |f| %>
@@ -20,12 +22,12 @@
   </div>
 
   <div>
-    <%= f.label :ingredient_name, "使用する食材" %>
+    <%= f.label :ingredient_name, "食材" %>
     <%= f.text_field :ingredient_name %>
   </div>
 
   <div>
-    <%= f.label :seasoning_name, "使用する調味料" %>
+    <%= f.label :seasoning_name, "調味料" %>
     <%= f.text_field :seasoning_name %>
   </div>
 
@@ -37,4 +39,4 @@
   <%= f.submit "投稿する" %>
 <% end %>
 
-<br><br><%= link_to "編集せずにトップページへ戻る", root_path %>
+<br><br><%= link_to "トップページへ戻る", root_path, class: "root-btn" %>

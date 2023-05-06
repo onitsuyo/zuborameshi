@@ -1,0 +1,21 @@
+<div class = "main-header">
+  <h1 class = "main-title">ずぼらめし</h1>
+  <ul class = "lists-right">
+    <% if user_signed_in? %>
+      <li class = "link-first">
+        <%= link_to current_user.name, "#", class: "user-name" %>
+      </li> 
+      <li class = "link-second">
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "logout" %>
+      </li> 
+    <% else %>
+      <li class = "link-first">
+        <%= link_to "ログイン", new_user_session_path, class: "login" %>
+      </li>
+      <li class = "link-second">
+        <%= link_to "新規登録", new_user_registration_path, class: "sign-up" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

@@ -1,11 +1,12 @@
-<h1>詳細ページ</h1>
-
+<div class = "header">
+  <%= render "subheader" %>
+</div>
 
 <div>投稿者：<%= @recipe.user.name %></div>
 <div>料理の名前：<%= @recipe.recipe_title %></div>
-<div><%= image_tag @recipe.image %></div>
+<div class = "show-image"><%= image_tag @recipe.image %></div>
 <div>説明文：<%= @recipe.caption %></div>
-<div>調理時間：<%= @recipe.cooking_time %>分</div><br>
+<div>調理時間：<%= @recipe.cooking_time %>分</div>
 <div>
   <% @recipe.ingredients.each do |ingredient| %>
     材料：　<%= ingredient.ingredient_name %></div>
@@ -20,17 +21,16 @@
   <% @recipe.procedures.each do |procedure| %>
     手順：　<%= procedure.step %></div>
   <% end %>
-</div>
-
+</div><br>
 
 <% if user_signed_in? %> 
   <% if current_user.id == @recipe.user_id %>
-    <%= link_to "編集する", edit_recipe_path(@recipe.id), method: :get %><br>
-    <%= link_to "削除する", recipe_path(@recipe.id), method: :delete, data: { confirm: "削除しますか？" } %>
+    <div class = "btn-group">
+      <%= link_to "編集", edit_recipe_path(@recipe.id), method: :get, class: "post-btn" %><br>
+      <%= link_to "削除", recipe_path(@recipe.id), method: :delete, data: { confirm: "削除しますか？" }, class: "post-btn" %>
+    </div>
   <% end %>
 <% end %>
 <br><br>
 
-<div>
-  <%= link_to 'トップページに戻る', root_path %>
-</div>
+  <%= link_to 'トップページに戻る', root_path, class: "root-btn" %>
